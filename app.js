@@ -7,11 +7,19 @@ require('dotenv').config();
 const app = express();
 
 // ✅ CORS Setup for Firebase
+const allowedOrigins = ['https://seasonwize-6c213.web.app'];
+
 app.use(cors({
-    origin: 'https://seasonwize-6c213.web.app', // ✅ Your Firebase frontend URL
-    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-    credentials: true // ✅ allow cookies/session across domains
+    origin: function (origin, callback) {
+        if (!origin || allowedOrigins.includes(origin)) {
+            callback(null, true);
+        } else {
+            callback(new Error('Not allowed by CORS'));
+        }
+    },
+    credentials: true
 }));
+
 
 // ✅ Session setup (if you're using session login)
 app.use(session({
