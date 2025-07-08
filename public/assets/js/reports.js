@@ -30,7 +30,7 @@ function renderChart(id, label, labels, data, color, chartRefName) {
 function exportCSV() {
     const fromDate = document.getElementById('fromDate').value;
     const toDate = document.getElementById('toDate').value;
-    let url = `https://seasonwize-backend.huzaifa.repl.co/api/reports/export/csv`;
+    let url = `https://seasonwize-server-production.up.railway.app/api/reports/export/csv`;
     if (fromDate && toDate) url += `?from=${fromDate}&to=${toDate}`;
     window.open(url, '_blank');
 }
@@ -38,7 +38,7 @@ function exportCSV() {
 function exportPDF() {
     const fromDate = document.getElementById('fromDate').value;
     const toDate = document.getElementById('toDate').value;
-    let url = `https://seasonwize-backend.huzaifa.repl.co/api/reports/export/pdf`;
+    let url = `https://seasonwize-server-production.up.railway.app/api/reports/export/pdf`;
     if (fromDate && toDate) url += `?from=${fromDate}&to=${toDate}`;
     window.open(url, '_blank');
 }
@@ -48,7 +48,7 @@ async function loadReports() {
         const from = document.getElementById('fromDate').value;
         const to = document.getElementById('toDate').value;
 
-        let url = 'https://seasonwize-backend.huzaifa.repl.co/api/reports';
+        let url = 'https://seasonwize-server-production.up.railway.app/api/reports';
         if (from && to) {
             url += `?from=${from}&to=${to}`;
         }
