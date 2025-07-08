@@ -58,7 +58,7 @@
             const apiKey = document.getElementById('apiKey').value;
             const apiSecret = document.getElementById('apiSecret').value;
 
-            fetch('http://localhost:5000/api/settings', {
+            fetch('https://seasonwize-backend.huzaifa.repl.co/api/settings', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ storeName, apiKey, apiSecret })

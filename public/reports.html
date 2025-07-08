@@ -98,7 +98,7 @@
 
         async function loadReports() {
             try {
-                const res = await fetch('http://localhost:5000/api/reports');
+                const res = await fetch('https://seasonwize-backend.huzaifa.repl.co/api/reports');
                 const data = await res.json();
 
                 // Render charts (destroy previous ones first if needed)
@@ -147,11 +147,11 @@
         }
 
         function exportCSV() {
-            window.open(`http://localhost:5000/api/reports/export/csv`, '_blank');
+            window.open(`https://seasonwize-backend.huzaifa.repl.co/api/reports/export/csv`, '_blank');
         }
 
         function exportPDF() {
-            window.open(`http://localhost:5000/api/reports/export/pdf`, '_blank');
+            window.open(`https://seasonwize-backend.huzaifa.repl.co/api/reports/export/pdf`, '_blank');
         }
     </script>
 

@@ -1,7 +1,7 @@
 window.addEventListener('DOMContentLoaded', loadExpenses);
 
 function loadExpenses() {
-    fetch('http://localhost:5000/api/expenses')
+    fetch('https://seasonwize-backend.huzaifa.repl.co/api/expenses')
         .then(response => response.json())
         .then(expenses => {
             const tbody = document.querySelector('tbody');

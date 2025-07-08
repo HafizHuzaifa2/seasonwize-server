@@ -1,7 +1,7 @@
 window.addEventListener('DOMContentLoaded', loadSuppliers);
 
 function loadSuppliers() {
-  fetch('http://localhost:5000/api/suppliers')
+  fetch('https://seasonwize-backend.huzaifa.repl.co/api/suppliers')
     .then(response => response.json())
     .then(suppliers => {
       const tbody = document.querySelector('tbody');

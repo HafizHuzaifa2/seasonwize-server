@@ -2,7 +2,7 @@
 window.addEventListener('DOMContentLoaded', loadProducts);
 
 function loadProducts() {
-  fetch('http://localhost:5000/api/products')
+  fetch('https://seasonwize-backend.huzaifa.repl.co/api/products')
     .then(response => response.json())
     .then(products => {
       const tbody = document.querySelector('tbody');
@@ -31,7 +31,7 @@ function loadProducts() {
 // Example: Delete product
 function deleteProduct(id) {
   if (confirm('Are you sure you want to delete this product?')) {
-    fetch(`http://localhost:5000/api/products/${id}`, { method: 'DELETE' })
+    fetch(`https://seasonwize-backend.huzaifa.repl.co/api/products/${id}`, { method: 'DELETE' })
       .then(() => loadProducts())
       .catch(err => console.error('Delete error:', err));
   }

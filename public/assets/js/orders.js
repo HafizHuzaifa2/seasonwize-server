@@ -1,7 +1,7 @@
 window.addEventListener('DOMContentLoaded', loadOrders);
 
 function loadOrders() {
-  fetch('http://localhost:5000/api/orders')
+  fetch('https://seasonwize-backend.huzaifa.repl.co/api/orders')
     .then(response => response.json())
     .then(orders => {
       const tbody = document.querySelector('tbody');
