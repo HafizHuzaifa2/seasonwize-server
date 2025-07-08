@@ -5,6 +5,11 @@ const session = require('express-session');
 const path = require('path');
 require('dotenv').config();
 
+// ✅ CORS Middleware
+app.use(cors({
+    origin: ['http://localhost:5500', 'http://127.0.0.1:5500', 'https://search-3e930.web.app'], // ✅ Your actual Firebase frontend domain
+    credentials: true
+}));
 // Route imports
 const productsRoutes = require('./server/routes/products');
 const ordersRoutes = require('./server/routes/orders');
@@ -26,11 +31,6 @@ app.use(session({
     }
 }));
 
-// ✅ CORS Middleware
-app.use(cors({
-    origin: ['http://localhost:5500', 'http://127.0.0.1:5500', 'https://search-3e930.web.app'], // ✅ Your actual Firebase frontend domain
-    credentials: true
-}));
 
 // ✅ Other Middleware
 app.use(express.json());
