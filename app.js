@@ -6,36 +6,41 @@ require('dotenv').config();
 
 const app = express();
 
-// ✅ CORS: Allow Firebase frontend
+// ✅ Replace with your actual frontend Firebase URL
+const allowedOrigin = 'https://search-3e930.web.app';
+
+// ✅ CORS setup for normal + preflight (OPTIONS) requests
 app.use(cors({
-    origin: 'https://search-3e930.web.app', // ✅ your Firebase frontend
-    credentials: true
+    origin: allowedOrigin,
+    credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization']
 }));
 
-// ✅ Preflight CORS handler for OPTIONS requests
+// ✅ Handle preflight OPTIONS requests
 app.options('*', cors({
-    origin: 'https://search-3e930.web.app',
+    origin: allowedOrigin,
     credentials: true
 }));
 
-// ✅ Body parser
-app.use(express.json());
-
-// ✅ Session middleware
+// ✅ Session setup (for authentication)
 app.use(session({
-    secret: 'Huzaifa', // 🔐 Replace with secure value in production
+    secret: 'Huzaifa', // 🔐 Use env var in production
     resave: false,
     saveUninitialized: false,
     cookie: {
-        sameSite: 'None',  // required for cross-origin sessions
-        secure: true       // required for HTTPS (Railway)
+        sameSite: 'None',
+        secure: true // Must be true for cookies to work with Firebase (HTTPS)
     }
 }));
 
-// ✅ Static public folder (for frontend hosting if needed)
+// ✅ Middleware to parse JSON
+app.use(express.json());
+
+// ✅ Serve static files if needed (e.g., local testing)
 app.use(express.static(path.join(__dirname, 'public')));
 
-// ✅ Import all routes
+// ✅ ROUTES
 const productsRoutes = require('./server/routes/products');
 const ordersRoutes = require('./server/routes/orders');
 const expensesRoutes = require('./server/routes/expenses');
@@ -45,7 +50,7 @@ const reportsRoutes = require('./server/routes/reports');
 const settingsRoutes = require('./server/routes/settings');
 const dashboardRoutes = require('./server/routes/dashboard');
 
-// ✅ Mount all routes
+// ✅ Use routes
 app.use('/api/products', productsRoutes);
 app.use('/api/orders', ordersRoutes);
 app.use('/api/expenses', expensesRoutes);
@@ -58,5 +63,5 @@ app.use('/api/dashboard', dashboardRoutes);
 // ✅ Start server
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
-    console.log(`✅ Server running at http://localhost:${PORT}`);
+    console.log(`Server running on port ${PORT}`);
 });
