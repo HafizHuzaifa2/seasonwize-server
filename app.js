@@ -11,15 +11,6 @@ app.use(cors({
     credentials: true
 }));
 // Route imports
-const productsRoutes = require('./server/routes/products');
-const ordersRoutes = require('./server/routes/orders');
-const expensesRoutes = require('./server/routes/expenses');
-const suppliersRoutes = require('./server/routes/suppliers');
-const authRoutes = require('./server/routes/auth');
-const reportsRoutes = require('./server/routes/reports');
-const settingsRoutes = require('./server/routes/settings');
-const dashboardRoutes = require('./server/routes/dashboard');
-
 // ✅ Session Middleware (secure config for production)
 app.use(session({
     secret: process.env.SESSION_SECRET || 'Huzaifa', // 🔒 use env in production
@@ -30,6 +21,15 @@ app.use(session({
         secure: true        // ✅ Must be true when using HTTPS (Firebase, Railway)
     }
 }));
+const productsRoutes = require('./server/routes/products');
+const ordersRoutes = require('./server/routes/orders');
+const expensesRoutes = require('./server/routes/expenses');
+const suppliersRoutes = require('./server/routes/suppliers');
+const authRoutes = require('./server/routes/auth');
+const reportsRoutes = require('./server/routes/reports');
+const settingsRoutes = require('./server/routes/settings');
+const dashboardRoutes = require('./server/routes/dashboard');
+
 
 
 // ✅ Other Middleware
