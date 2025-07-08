@@ -4,7 +4,7 @@ const session = require('express-session');
 const app = express();
 
 // Replace with your actual Firebase Hosting domain
-const FRONTEND_ORIGIN = 'https://search-3e930.web.app';
+const FRONTEND_ORIGIN = 'https://seasonwize-6c213.web.app';
 
 // CORS Configuration
 app.use(cors({

@@ -2,7 +2,7 @@
 window.addEventListener('DOMContentLoaded', loadProducts);
 
 function loadProducts() {
-  fetch('https://seasonwize-server-production.up.railway.app/api/products')
+  fetch('http://localhost:5000/api/products')
     .then(response => response.json())
     .then(products => {
       const tbody = document.querySelector('tbody');
@@ -31,7 +31,7 @@ function loadProducts() {
 // Example: Delete product
 function deleteProduct(id) {
   if (confirm('Are you sure you want to delete this product?')) {
-    fetch(`https://seasonwize-server-production.up.railway.app/api/products/${id}`, { method: 'DELETE' })
+    fetch(`http://localhost:5000/api/products/${id}`, { method: 'DELETE' })
       .then(() => loadProducts())
       .catch(err => console.error('Delete error:', err));
   }

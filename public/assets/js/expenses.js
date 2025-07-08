@@ -1,7 +1,7 @@
 window.addEventListener('DOMContentLoaded', loadExpenses);
 
 function loadExpenses() {
-  fetch('https://seasonwize-server-production.up.railway.app/api/expenses')
+  fetch('http://localhost:5000/api/expenses')
     .then(response => response.json())
     .then(expenses => {
       const tbody = document.querySelector('tbody');

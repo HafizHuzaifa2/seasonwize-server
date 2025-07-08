@@ -1,7 +1,7 @@
 window.addEventListener('DOMContentLoaded', loadSuppliers);
 
 function loadSuppliers() {
-  fetch('https://seasonwize-server-production.up.railway.app/api/suppliers')
+  fetch('http://localhost:5000/api/suppliers')
     .then(response => response.json())
     .then(suppliers => {
       const tbody = document.querySelector('tbody');

@@ -61,6 +61,7 @@
             fetch('https://seasonwize-server-production.up.railway.app/api/settings', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
+                credentials: 'include',
                 body: JSON.stringify({ storeName, apiKey, apiSecret })
             })
                 .then(res => res.ok ? alert('Settings saved successfully') : alert('Failed to save'))
