@@ -1,32 +1,33 @@
 const express = require('express');
 const cors = require('cors');
 const session = require('express-session');
+const path = require('path');
+require('dotenv').config();
+
 const app = express();
 
-// Replace with your actual Firebase Hosting domain
-const FRONTEND_ORIGIN = 'https://seasonwize-6c213.web.app';
-
-// CORS Configuration
+// ✅ CORS Setup for Firebase
 app.use(cors({
-    origin: FRONTEND_ORIGIN,
-    credentials: true, // Allow cookies/sessions
+    origin: 'https://seasonwize-6c213.web.app', // ✅ Your Firebase frontend URL
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    credentials: true // ✅ allow cookies/session across domains
 }));
 
-// Session Configuration
+// ✅ Session setup (if you're using session login)
 app.use(session({
-    secret: 'Huzaifa',
+    secret: 'Huzaifa', // change this to a strong secret key
     resave: false,
     saveUninitialized: false,
     cookie: {
-        secure: true, // true if using HTTPS
-        sameSite: 'None' // must be 'None' for cross-origin cookies
+        sameSite: 'None',
+        secure: true // true for HTTPS (Firebase uses HTTPS)
     }
 }));
 
 app.use(express.json());
-app.use(express.static('public'));
+app.use(express.static(path.join(__dirname, '/public')));
 
-// Your Routes
+// ✅ Routes
 const productsRoutes = require('./server/routes/products');
 const ordersRoutes = require('./server/routes/orders');
 const expensesRoutes = require('./server/routes/expenses');
@@ -36,7 +37,6 @@ const reportsRoutes = require('./server/routes/reports');
 const settingsRoutes = require('./server/routes/settings');
 const dashboardRoutes = require('./server/routes/dashboard');
 
-// Mount Routes
 app.use('/api/products', productsRoutes);
 app.use('/api/orders', ordersRoutes);
 app.use('/api/expenses', expensesRoutes);
@@ -46,8 +46,8 @@ app.use('/api/reports', reportsRoutes);
 app.use('/api/settings', settingsRoutes);
 app.use('/api/dashboard', dashboardRoutes);
 
-// Server Start
+// ✅ Start server
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
+    console.log(`Backend running on port ${PORT}`);
 });
