@@ -1,32 +1,41 @@
 const express = require('express');
-const app = express();
 const cors = require('cors');
 const session = require('express-session');
 const path = require('path');
 require('dotenv').config();
 
-// ✅ CORS config: allow Firebase frontend to connect
+const app = express();
+
+// ✅ CORS: Allow Firebase frontend
 app.use(cors({
-    origin: 'https://search-3e930.web.app', // replace with your actual Firebase URL
+    origin: 'https://search-3e930.web.app', // ✅ your Firebase frontend
     credentials: true
 }));
 
-// ✅ Enable sessions
+// ✅ Preflight CORS handler for OPTIONS requests
+app.options('*', cors({
+    origin: 'https://search-3e930.web.app',
+    credentials: true
+}));
+
+// ✅ Body parser
+app.use(express.json());
+
+// ✅ Session middleware
 app.use(session({
-    secret: 'Huzaifa', // choose your own secret
+    secret: 'Huzaifa', // 🔐 Replace with secure value in production
     resave: false,
     saveUninitialized: false,
     cookie: {
-        sameSite: 'None',
-        secure: true // required for HTTPS
+        sameSite: 'None',  // required for cross-origin sessions
+        secure: true       // required for HTTPS (Railway)
     }
 }));
 
-// ✅ Middleware
-app.use(express.json());
+// ✅ Static public folder (for frontend hosting if needed)
 app.use(express.static(path.join(__dirname, 'public')));
 
-// ✅ Import routes
+// ✅ Import all routes
 const productsRoutes = require('./server/routes/products');
 const ordersRoutes = require('./server/routes/orders');
 const expensesRoutes = require('./server/routes/expenses');
@@ -36,7 +45,7 @@ const reportsRoutes = require('./server/routes/reports');
 const settingsRoutes = require('./server/routes/settings');
 const dashboardRoutes = require('./server/routes/dashboard');
 
-// ✅ Route mounting
+// ✅ Mount all routes
 app.use('/api/products', productsRoutes);
 app.use('/api/orders', ordersRoutes);
 app.use('/api/expenses', expensesRoutes);
@@ -46,8 +55,8 @@ app.use('/api/reports', reportsRoutes);
 app.use('/api/settings', settingsRoutes);
 app.use('/api/dashboard', dashboardRoutes);
 
-// ✅ Start the server
+// ✅ Start server
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
-    console.log(`✅ Admin panel running at http://localhost:${PORT}`);
+    console.log(`✅ Server running at http://localhost:${PORT}`);
 });
