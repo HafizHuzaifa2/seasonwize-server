@@ -1,15 +1,13 @@
 const express = require('express');
-const cors = require('cors');
 const session = require('express-session');
-const path = require('path');
+const cors = require('cors');
 require('dotenv').config();
 
 const app = express();
 
-// ✅ Replace with your actual frontend Firebase URL
+// ✅ Put your deployed Firebase frontend URL here
 const allowedOrigin = 'https://search-3e930.web.app';
 
-// ✅ CORS setup for normal + preflight (OPTIONS) requests
 app.use(cors({
     origin: allowedOrigin,
     credentials: true,
@@ -17,48 +15,35 @@ app.use(cors({
     allowedHeaders: ['Content-Type', 'Authorization']
 }));
 
-// ✅ Handle preflight OPTIONS requests
+// ✅ Handle preflight requests
 app.options('*', cors({
     origin: allowedOrigin,
     credentials: true
 }));
 
-// ✅ Session setup (for authentication)
+// ✅ Enable JSON parsing
+app.use(express.json());
+
+// ✅ Enable session with secure settings
 app.use(session({
-    secret: 'Huzaifa', // 🔐 Use env var in production
+    secret: 'Huzaifa',
     resave: false,
     saveUninitialized: false,
     cookie: {
         sameSite: 'None',
-        secure: true // Must be true for cookies to work with Firebase (HTTPS)
+        secure: true
     }
 }));
 
-// ✅ Middleware to parse JSON
-app.use(express.json());
-
-// ✅ Serve static files if needed (e.g., local testing)
-app.use(express.static(path.join(__dirname, 'public')));
-
 // ✅ ROUTES
-const productsRoutes = require('./server/routes/products');
-const ordersRoutes = require('./server/routes/orders');
-const expensesRoutes = require('./server/routes/expenses');
-const suppliersRoutes = require('./server/routes/suppliers');
-const authRoutes = require('./server/routes/auth');
-const reportsRoutes = require('./server/routes/reports');
-const settingsRoutes = require('./server/routes/settings');
-const dashboardRoutes = require('./server/routes/dashboard');
-
-// ✅ Use routes
-app.use('/api/products', productsRoutes);
-app.use('/api/orders', ordersRoutes);
-app.use('/api/expenses', expensesRoutes);
-app.use('/api/suppliers', suppliersRoutes);
-app.use('/api/auth', authRoutes);
-app.use('/api/reports', reportsRoutes);
-app.use('/api/settings', settingsRoutes);
-app.use('/api/dashboard', dashboardRoutes);
+app.use('/api/auth', require('./server/routes/auth'));
+app.use('/api/products', require('./server/routes/products'));
+app.use('/api/orders', require('./server/routes/orders'));
+app.use('/api/expenses', require('./server/routes/expenses'));
+app.use('/api/suppliers', require('./server/routes/suppliers'));
+app.use('/api/reports', require('./server/routes/reports'));
+app.use('/api/settings', require('./server/routes/settings'));
+app.use('/api/dashboard', require('./server/routes/dashboard'));
 
 // ✅ Start server
 const PORT = process.env.PORT || 5000;
