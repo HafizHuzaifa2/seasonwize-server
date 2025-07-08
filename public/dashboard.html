@@ -73,7 +73,7 @@
 
     async function loadDashboard() {
       try {
-        const res = await fetch('http://localhost:5000/api/dashboard');
+        const res = await fetch('https://seasonwize-server.up.railway.app/api/dashboard');
         const data = await res.json();
 
         document.getElementById('todaysSales').textContent = `PKR ${data.todaysSales}`;

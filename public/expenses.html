@@ -54,7 +54,7 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
         function loadExpenses() {
-            fetch('http://localhost:5000/api/expenses')
+            fetch('https://seasonwize-server.up.railway.app/api/expenses')
                 .then(res => res.json())
                 .then(expenses => {
                     const tbody = document.getElementById('expenseTableBody');
@@ -103,8 +103,8 @@
             }).then(result => {
                 if (result.isConfirmed) {
                     const url = mode === 'edit'
-                        ? `http://localhost:5000/api/expenses/${id}`
-                        : 'http://localhost:5000/api/expenses';
+                        ? `https://seasonwize-server.up.railway.app/api/expenses/${id}`
+                        : 'https://seasonwize-server.up.railway.app/api/expenses';
                     const method = mode === 'edit' ? 'PUT' : 'POST';
 
                     fetch(url, {
@@ -130,7 +130,7 @@
 
         function deleteExpense(id) {
             if (confirm('Are you sure you want to delete this expense?')) {
-                fetch(`http://localhost:5000/api/expenses/${id}`, { method: 'DELETE' })
+                fetch(`https://seasonwize-server.up.railway.app/api/expenses/${id}`, { method: 'DELETE' })
                     .then(() => {
                         Swal.fire('Deleted!', 'Expense deleted successfully.', 'success');
                         loadExpenses();
