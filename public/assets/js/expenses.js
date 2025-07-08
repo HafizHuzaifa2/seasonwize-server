@@ -1,13 +1,13 @@
 window.addEventListener('DOMContentLoaded', loadExpenses);
 
 function loadExpenses() {
-  fetch('https://seasonwize-server.up.railway.app/api/expenses')
-    .then(response => response.json())
-    .then(expenses => {
-      const tbody = document.querySelector('tbody');
-      tbody.innerHTML = '';
-      expenses.forEach((exp, index) => {
-        const row = `
+    fetch('http://localhost:5000/api/expenses')
+        .then(response => response.json())
+        .then(expenses => {
+            const tbody = document.querySelector('tbody');
+            tbody.innerHTML = '';
+            expenses.forEach((exp, index) => {
+                const row = `
           <tr>
             <td>${index + 1}</td>
             <td>${exp[1]}</td> <!-- category -->
@@ -16,8 +16,8 @@ function loadExpenses() {
             <td>${exp[4]}</td> <!-- description -->
           </tr>
         `;
-        tbody.insertAdjacentHTML('beforeend', row);
-      });
-    })
-    .catch(err => console.error('Error fetching expenses:', err));
+                tbody.insertAdjacentHTML('beforeend', row);
+            });
+        })
+        .catch(err => console.error('Error fetching expenses:', err));
 }

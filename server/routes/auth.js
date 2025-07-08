@@ -6,7 +6,7 @@ const bcrypt = require('bcrypt'); // password hash check
 // POST /api/auth/login
 router.post('/login', async (req, res) => {
     const { username, password } = req.body;
-    // console.log(username, password);
+    console.log(username, password);
     try {
         const result = await db.execute(
             'SELECT user_id, password_hash FROM sw_users WHERE username=:username',
@@ -17,7 +17,7 @@ router.post('/login', async (req, res) => {
         }
         const user = result.rows[0];
         const isMatch = await bcrypt.compare(password, user[1]);
-        // console.log(isMatch);
+        console.log(isMatch);
         if (!isMatch) {
             return res.status(401).send('Invalid username or password');
         }
