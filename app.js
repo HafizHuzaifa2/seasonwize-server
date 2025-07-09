@@ -12,8 +12,6 @@ const dashboardRoutes = require('./server/routes/dashboard');
 // const shopifyRoutes = require('./routes/shopify');
 const path = require('path');
 
-const cors = require('cors');
-
 app.use(cors({
     origin: 'https://seasonwize-6c213.web.app',  // Your Firebase frontend
     credentials: true
