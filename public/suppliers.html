@@ -90,7 +90,7 @@
             e.preventDefault();
             const name = document.getElementById('supplierName').value;
             const contacts = document.getElementById('supplierContact').value;
-            fetch('https://seasonwize-server.onrender.com/suppliers', {
+            fetch('https://seasonwize-server.onrender.com/api/suppliers', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ name, contacts })
@@ -107,7 +107,7 @@
         });
 
         function loadSuppliers() {
-            fetch('https://seasonwize-server.onrender.com/suppliers')
+            fetch('https://seasonwize-server.onrender.com/api/suppliers')
                 .then(res => res.json())
                 .then(data => {
                     const tbody = document.getElementById('supplierTableBody');
@@ -127,7 +127,7 @@
 
         function deleteSupplier(id) {
             if (confirm('Delete this supplier?')) {
-                fetch(`https://seasonwize-server.onrender.com/suppliers/${id}`, {
+                fetch(`https://seasonwize-server.onrender.com/api/suppliers/${id}`, {
                     method: 'DELETE'
                 })
                     .then(() => loadSuppliers())

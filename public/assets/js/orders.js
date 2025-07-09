@@ -1,7 +1,7 @@
 window.addEventListener('DOMContentLoaded', loadOrders);
 
 function loadOrders() {
-  fetch('https://seasonwize-server.onrender.com/orders')
+  fetch('https://seasonwize-server.onrender.com/api/orders')
     .then(response => response.json())
     .then(orders => {
       const tbody = document.querySelector('tbody');
