@@ -12,10 +12,18 @@ const dashboardRoutes = require('./server/routes/dashboard');
 // const shopifyRoutes = require('./routes/shopify');
 const path = require('path');
 
+const allowedOrigins = ['https://seasonwize-6c213.web.app', 'http://localhost:5500'];
 app.use(cors({
-    origin: 'https://seasonwize-6c213.web.app',  // Your Firebase frontend
-    credentials: true
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  credentials: true
 }));
+
 
 // For preflight
 app.options('*', cors());
