@@ -41,6 +41,7 @@ app.use('/api/settings', settingsRoutes);
 app.use('/api/products', productsRoutes);
 
 // Start server
-const PORT = 5000;
+const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Admin panel running at http://localhost:${PORT}`));
+
 
