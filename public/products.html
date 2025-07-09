@@ -94,7 +94,7 @@
         window.addEventListener('DOMContentLoaded', loadProducts);
 
         function loadProducts() {
-            fetch('https://seasonwize-server-production.up.railway.app/api/products')
+            fetch('https://seasonwize-server.onrender.com/products')
                 .then(response => response.json())
                 .then(products => {
                     const tbody = document.querySelector('tbody');
@@ -131,7 +131,7 @@
             isEditing = true;
             document.getElementById('productModalLabel').innerText = 'Edit Product';
 
-            fetch('https://seasonwize-server-production.up.railway.app/api/products')
+            fetch('https://seasonwize-server.onrender.com/products')
                 .then(response => response.json())
                 .then(products => {
                     const prod = products.find(p => p[0] === id);
@@ -149,7 +149,7 @@
 
         function deleteProduct(id) {
             if (confirm('Are you sure you want to delete this product?')) {
-                fetch(`https://seasonwize-server-production.up.railway.app/api/products/${id}`, { method: 'DELETE' })
+                fetch(`https://seasonwize-server.onrender.com/products/${id}`, { method: 'DELETE' })
                     .then(() => loadProducts())
                     .catch(err => console.error('Delete error:', err));
             }
@@ -172,8 +172,8 @@
             };
 
             const url = isEditing
-                ? `https://seasonwize-server-production.up.railway.app/api/products/${id}`
-                : 'https://seasonwize-server-production.up.railway.app/api/products';
+                ? `https://seasonwize-server.onrender.com/products/${id}`
+                : 'https://seasonwize-server.onrender.com/products';
 
             const method = isEditing ? 'PUT' : 'POST';
 

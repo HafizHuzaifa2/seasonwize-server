@@ -98,7 +98,7 @@
 
         async function loadReports() {
             try {
-                const res = await fetch('https://seasonwize-server-production.up.railway.app/api/reports');
+                const res = await fetch('https://seasonwize-server.onrender.com/reports');
                 const data = await res.json();
 
                 // Render charts (destroy previous ones first if needed)
@@ -147,11 +147,11 @@
         }
 
         function exportCSV() {
-            window.open(`https://seasonwize-server-production.up.railway.app/api/reports/export/csv`, '_blank');
+            window.open(`https://seasonwize-server.onrender.com/reports/export/csv`, '_blank');
         }
 
         function exportPDF() {
-            window.open(`https://seasonwize-server-production.up.railway.app/api/reports/export/pdf`, '_blank');
+            window.open(`https://seasonwize-server.onrender.com/reports/export/pdf`, '_blank');
         }
     </script>
 
